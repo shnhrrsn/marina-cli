@@ -11,9 +11,10 @@ export class InstallCommand extends BaseCommand {
 	wantsSudo = true
 
 	async run() {
-		const home = Path.join(process.env.HOME, '.marina')
-		await ChildProcess.exec(`sudo -u "${process.env.SUDO_USER}" mkdir -p "${home}" "${home}"/hosts`)
-		await FS.copy(this.app.paths.base('resources/config/Caddyfile'), Path.join(home, 'Caddyfile'))
+		const home = this.app.paths.home()
+		const hosts = this.app.paths.hosts()
+		await ChildProcess.exec(`sudo -u "${process.env.SUDO_USER}" mkdir -p "${home}" "${hosts}"`)
+		await FS.copy(this.app.paths.resources('config/Caddyfile'), Path.join(home, 'Caddyfile'))
 
 		for(const installerClass of Installers) {
 			const installer = new installerClass(this.app)

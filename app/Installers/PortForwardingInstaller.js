@@ -41,7 +41,7 @@ export class PortForwardingInstaller extends BaseInstaller {
 			'%admin ALL=(root) NOPASSWD: /sbin/pfctl -F all -f /etc/pf.conf'
 		])
 
-		await this.copyFile(this.app.paths.base('resources/config/marina.port-forwarding.plist'), LAUNCHCTL_PLIST)
+		await this.copyFile(this.app.paths.resources('config/marina.port-forwarding.plist'), LAUNCHCTL_PLIST)
 		await this.sudo(`launchctl load -w ${LAUNCHCTL_PLIST}`)
 	}
 
