@@ -1,0 +1,43 @@
+{
+  "name": "marina-cli",
+  "version": "1.0.0",
+  "description": "CLI tool for Docker to provide simple, shareable hostnames. Inspired by Laravel Valet.",
+  "author": "Shaun Harrison (@shnhrrsn)",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/grindjs/framework.git"
+  },
+  "keywords": [
+    "docker"
+  ],
+  "preferGlobal": true,
+  "bin": {
+    "grind": "./command.js"
+  },
+  "dependencies": {
+    "child-process-promise": "^2.1.3",
+    "fs-promise": "^0.5.0",
+    "grind-core": "^0.5.1"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.14.0",
+    "babel-eslint": "^6.1.1",
+    "babel-plugin-import-auto-name": "^0.1.0",
+    "babel-plugin-module-alias": "^1.2.0",
+    "babel-plugin-transform-isnil": "0.0.5",
+    "babel-preset-es2016-node5": "^1.1.2",
+    "babel-preset-stage-1": "^6.5.0",
+    "eslint": "^3.3.1",
+    "eslint-config-grind": "^2.0.0",
+    "eslint-plugin-import-auto-name": "^1.0.3"
+  },
+  "engines": {
+    "node": ">=5.10 <7.0"
+  },
+  "scripts": {
+    "prepublish": "./build",
+    "cli": "./command.js",
+    "lint": "eslint src"
+  }
+}

@@ -1,0 +1,5 @@
+import hosts/*.conf
+
+:48080 {
+	# Do nothing
+}
