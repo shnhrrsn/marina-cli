@@ -6,6 +6,7 @@ import 'App/Commands/UndockCommand'
 import 'App/Commands/UninstallCommand'
 
 export function CommandsProvider(app) {
+	app.cli.commands.length = 0
 	app.cli.register(DockCommand)
 	app.cli.register(InstallCommand)
 	app.cli.register(ListCommand)
