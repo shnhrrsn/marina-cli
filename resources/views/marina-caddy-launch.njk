@@ -10,7 +10,8 @@
 		<string>{{ home }}/caddy</string>
 		<key>ProgramArguments</key>
 		<array>
-			<string>--conf="{{ home }}/Caddyfile"</string>
+			<string>-conf="{{ home }}/Caddyfile"</string>
+			<string>-http2=false</string>
 		</array>
 		<key>RunAtLoad</key>
 		<true/>
