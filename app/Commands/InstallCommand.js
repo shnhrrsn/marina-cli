@@ -11,6 +11,13 @@ export class InstallCommand extends BaseCommand {
 	wantsSudo = true
 
 	async run() {
+		const valetExists = await this.checkIfCommandExists('valet')
+
+		if(valetExists) {
+			this.error('Marina is not compatible with Laravel Valet, uninstall before proceedig.')
+			process.exit(1)
+		}
+
 		const home = this.app.paths.home()
 		const hosts = this.app.paths.hosts()
 		await ChildProcess.exec(`sudo -u "${process.env.SUDO_USER}" mkdir -p "${home}" "${hosts}"`)
@@ -42,6 +49,12 @@ export class InstallCommand extends BaseCommand {
 			}
 
 		}
+	}
+
+	checkIfCommandExists(command) {
+		return ChildProcess.exec(`/usr/bin/which "${command}"`)
+		.then(() => true)
+		.catch(() => false)
 	}
 
 }
