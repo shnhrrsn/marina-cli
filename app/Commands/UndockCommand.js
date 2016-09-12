@@ -6,7 +6,8 @@ export class UndockCommand extends BaseDockCommand {
 	description = 'Unregister the a project with Marina'
 	domainPrompt = 'What domain do you want to unregister?'
 	options = {
-		domain: [ 'Domain', 'string' ]
+		domain: [ 'Domain', 'string' ],
+		save: 'Remove existing .marina.json file.'
 	}
 
 	async run() {
@@ -21,6 +22,10 @@ export class UndockCommand extends BaseDockCommand {
 
 		this.comment('Restarting')
 		await this.caddy.restart()
+
+		if(this.option('save') === true && this.saved.domain === this.domain) {
+			await FS.unlink(this.savePath)
+		}
 
 		this.success('Done')
 	}
