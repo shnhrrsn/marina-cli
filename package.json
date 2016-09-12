@@ -1,7 +1,7 @@
 {
   "name": "marina-cli",
   "version": "1.0.0",
-  "description": "CLI tool for Docker to provide simple, shareable domains. Inspired by Laravel Valet.",
+  "description": "Marina is a CLI tool to provide simple, shareable domains for your dev environment.",
   "author": "Shaun Harrison (@shnhrrsn)",
   "license": "MIT",
   "repository": {
@@ -9,6 +9,10 @@
     "url": "https://github.com/grindjs/framework.git"
   },
   "keywords": [
+    "reverse-proxy",
+    "caddy",
+    "ngrok",
+    "dnsmasq",
     "docker"
   ],
   "preferGlobal": true,

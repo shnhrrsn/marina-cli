@@ -1,6 +1,10 @@
 # marina-cli
 
-Marina is a CLI tool for Docker to provide simple, shareable domains. Marina was inspired by [Laravel Valet](http://github.com/laravel/valet), however running Marina and Valet side by side is not supported.
+Marina is a CLI tool to provide simple, shareable domains by creating a reverse proxy with [Caddy](https://caddyserver.com) and serving `*.dev` via Dnsmasq.  No need to mess with hosts files, quickly and easily turn `http://localhost:3000` into `http://domain.dev`.
+
+Marina also integrates with [ngrok](https://ngrok.com) allowing you to create a publicly shareable link with a simple `share` command.
+
+Marina was inspired by [Laravel Valet](http://github.com/laravel/valet), however running Marina and Valet side by side is not supported.
 
 ## Installation
 
