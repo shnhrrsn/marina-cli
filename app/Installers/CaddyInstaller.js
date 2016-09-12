@@ -26,6 +26,7 @@ export class CaddyInstaller extends BaseInstaller {
 
 		await this.writeFile(SUDOER, [
 			`%admin ALL=(root) NOPASSWD: /bin/launchctl load ${LAUNCHCTL_PLIST}`,
+			`%admin ALL=(root) NOPASSWD: /bin/launchctl load -w ${LAUNCHCTL_PLIST}`,
 			`%admin ALL=(root) NOPASSWD: /bin/launchctl unload ${LAUNCHCTL_PLIST}`,
 			'%admin ALL=(root) NOPASSWD: /bin/launchctl list marina.caddy',
 		])
