@@ -67,19 +67,19 @@ export class BaseInstaller {
 		return FS.exists(file)
 	}
 
-	exec(command) {
+	exec(command, options) {
 		if(process.env.USER === 'root') {
-			return ChildProcess.exec(`sudo -u "${process.env.SUDO_USER}" ${command}`)
+			return ChildProcess.exec(`sudo -u "${process.env.SUDO_USER}" ${command}`, options)
 		} else {
-			return ChildProcess.exec(command)
+			return ChildProcess.exec(command, options)
 		}
 	}
 
-	sudo(command) {
+	sudo(command, options) {
 		if(process.env.USER === 'root') {
-			return ChildProcess.exec(command)
+			return ChildProcess.exec(command, options)
 		} else {
-			return ChildProcess.exec(`sudo ${command}`)
+			return ChildProcess.exec(`sudo ${command}`, options)
 		}
 	}
 
