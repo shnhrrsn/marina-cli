@@ -6,6 +6,7 @@ import ChildProcess from 'child-process-promise'
 export class ShareCommand extends BaseDockCommand {
 	name = 'share'
 	description = 'Generate a shareable URL for a project.'
+	domainPrompt = 'What domain do you want to share?'
 	options = {
 		domain: [ 'Domain', 'string' ],
 	}

@@ -5,6 +5,7 @@ import 'App/Installers/CaddyInstaller'
 import Path from 'path'
 
 export class BaseDockCommand extends BaseCommand {
+	domainPrompt = 'What should the domain be for this project?'
 	savePath = null
 	saved = null
 	domain = null
@@ -17,7 +18,7 @@ export class BaseDockCommand extends BaseCommand {
 		this.domain = this.option('domain') || this.saved.domain
 
 		if(this.domain.isNil) {
-			this.domain = await this.ask('What should the domain be for this project?')
+			this.domain = await this.ask(this.domainPrompt)
 		}
 
 		this.domain = `${this.domain.toLowerCase().replace(/\.dev$/g, '')}.dev`
