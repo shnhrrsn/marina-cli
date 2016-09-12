@@ -1,0 +1,13 @@
+#domain:{{ domain }}
+#proxy:{{ proxy }}
+http://{{ domain }} {
+	proxy / {{ proxy }} {
+		transparent
+	}
+}
+
+# https://{{ domain }} {
+# 	proxy / {{ proxy }} {
+# 		transparent
+# 	}
+# }

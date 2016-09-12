@@ -1,7 +1,14 @@
+require('babel-polyfill')
+
 import Grind from 'grind-framework'
 
+import 'App/Providers/ViewProvider'
 import 'App/Extensions/Paths'
 
-module.exports = new Grind({
+const app = new Grind({
 	pathsClass: Paths
 })
+
+app.providers.push(ViewProvider)
+
+module.exports = app

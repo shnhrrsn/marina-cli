@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+	<dict>
+		<key>Label</key>
+		<string>marina.caddy</string>
+		<key>WorkingDirectory</key>
+		<string>{{ home }}</string>
+		<key>Program</key>
+		<string>{{ home }}/caddy</string>
+		<key>ProgramArguments</key>
+		<array>
+			<string>--conf="{{ home }}/Caddyfile"</string>
+		</array>
+		<key>RunAtLoad</key>
+		<true/>
+		<key>ServiceDescription</key>
+		<string>Marina Caddy Server</string>
+		<key>StandardErrorPath</key>
+		<string>/var/log/marina.caddy.log</string>
+		<key>StandardOutPath</key>
+		<string>/var/log/marina.caddy.log</string>
+	</dict>
+</plist>
