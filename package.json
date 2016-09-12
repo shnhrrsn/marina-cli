@@ -1,7 +1,7 @@
 {
   "name": "marina-cli",
   "version": "1.0.0",
-  "description": "CLI tool for Docker to provide simple, shareable hostnames. Inspired by Laravel Valet.",
+  "description": "CLI tool for Docker to provide simple, shareable domains. Inspired by Laravel Valet.",
   "author": "Shaun Harrison (@shnhrrsn)",
   "license": "MIT",
   "repository": {

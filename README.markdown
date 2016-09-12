@@ -1,5 +1,7 @@
 # marina-cli
 
+Marina is a CLI tool for Docker to provide simple, shareable domains. Marina was inspired by [Laravel Valet](http://github.com/laravel/valet), however running Marina and Valet side by side is not supported.
+
 ## Installation
 
 ```bash
@@ -17,4 +19,6 @@ sudo marina install
 * `marina uninstall`: Uninstall the Marina toolchain
 
 ### --save
-When running `marina dock` pass the `--save` flag (ex: `marina dock --save`) to persist your settings.  This will enable Marina to save the domain/source host settings to a `.marina.json`.  The `dock`, `undock` and `share` commands will all read `.marina.json` from the current working directory if it exists, allow you to quickly run those commands without needing to specify a domain.
+When running `marina dock` pass the `--save` flag (ex: `marina dock --save`) to persist your settings.  This will enable Marina to save the domain/source host settings to a `.marina.json` file in the current directory.
+
+The `dock`, `undock` and `share` commands will read from `.marina.json` if it exists, allowing you to quickly run those commands without needing to specify a domain.
