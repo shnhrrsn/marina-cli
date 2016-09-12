@@ -11,6 +11,13 @@ export class InstallCommand extends BaseCommand {
 	wantsSudo = true
 
 	async run() {
+		const brewExists = await this.checkIfCommandExists('brew')
+
+		if(!brewExists) {
+			this.error('Please install brew before proceeding: http://brew.sh')
+			process.exit(1)
+		}
+
 		const valetExists = await this.checkIfCommandExists('valet')
 
 		if(valetExists) {
