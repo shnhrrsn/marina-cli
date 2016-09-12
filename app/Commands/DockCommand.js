@@ -44,6 +44,7 @@ export class DockCommand extends BaseDockCommand {
 		await this.caddy.restart()
 
 		this.success('--> Done')
+		this.success(`--> http://${this.domain}`)
 	}
 
 }
