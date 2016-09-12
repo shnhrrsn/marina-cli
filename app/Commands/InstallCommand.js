@@ -15,6 +15,7 @@ export class InstallCommand extends BaseCommand {
 		const hosts = this.app.paths.hosts()
 		await ChildProcess.exec(`sudo -u "${process.env.SUDO_USER}" mkdir -p "${home}" "${hosts}"`)
 		await FS.copy(this.app.paths.resources('config/Caddyfile'), Path.join(home, 'Caddyfile'))
+		await FS.mkdirs('/etc/sudoers.d')
 
 		for(const installerClass of Installers) {
 			const installer = new installerClass(this.app)
