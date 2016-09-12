@@ -41,8 +41,6 @@ export class InstallCommand extends BaseCommand {
 			}
 
 		}
-
-		// this.info('testing', process.env)
 	}
 
 }
