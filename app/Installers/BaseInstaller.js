@@ -51,6 +51,10 @@ export class BaseInstaller {
 		return this.start()
 	}
 
+	readFile(file) {
+		return FS.readFile(file).then(content => content.toString())
+	}
+
 	writeFile(file, lines) {
 		return FS.writeFile(file, `${lines.join(`\n`)}\n`)
 	}
@@ -65,6 +69,10 @@ export class BaseInstaller {
 
 	fileExists(file) {
 		return FS.exists(file)
+	}
+
+	mkdirs(...args) {
+		return FS.mkdirs(...args)
 	}
 
 	exec(command, options) {
