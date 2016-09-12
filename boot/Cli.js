@@ -1,4 +1,4 @@
-import {CliProvider} from 'grind-cli'
+import { CliProvider } from 'grind-cli'
 import 'App/Providers/CommandsProvider'
 
 const app = require('App/Bootstrap')

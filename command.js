@@ -1,3 +1,7 @@
-#!/usr/bin/env node --es_staging
+#!/usr/bin/env node
+const path = require('path')
 
-require('./lib/boot/Cli.js');
+process.env.ORIGINAL_WD = process.cwd()
+process.chdir(path.join(__dirname, 'lib'))
+
+require(path.join(__dirname, 'lib/boot/Cli.js'))

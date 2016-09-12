@@ -13,7 +13,7 @@
   ],
   "preferGlobal": true,
   "bin": {
-    "grind": "./command.js"
+    "marina": "./command.js"
   },
   "dependencies": {
     "child-process-promise": "^2.1.3",
