@@ -21,7 +21,7 @@ export class InstallCommand extends BaseCommand {
 		const valetExists = await this.checkIfCommandExists('valet')
 
 		if(valetExists) {
-			this.error('Marina is not compatible with Laravel Valet, uninstall before proceedig.')
+			this.error('Marina is not compatible with Laravel Valet, uninstall before proceeding.')
 			process.exit(1)
 		}
 
