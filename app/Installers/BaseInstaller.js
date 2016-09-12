@@ -37,6 +37,20 @@ export class BaseInstaller {
 		throw new Error('Subclasses must implement.')
 	}
 
+	async restart() {
+		if(!this.isService) {
+			return
+		}
+
+		const isRunning = await this.isRunning()
+
+		if(isRunning) {
+			await this.stop()
+		}
+
+		return this.start()
+	}
+
 	writeFile(file, lines) {
 		return FS.writeFile(file, `${lines.join(`\n`)}\n`)
 	}
