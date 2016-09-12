@@ -41,9 +41,13 @@ export class BaseBrewInstaller extends BaseInstaller {
 	}
 
 	isRunning() {
-		return this.exec(`brew services list | grep ${this.formula}`).then(result =>
-			result.stdout.toLowerCase().indexOf('started') >= 0
-		)
+		return this.exec('brew services list').then(result => {
+			const content = result.stdout.toLowerCase().split(/\n+/).filter(
+				line => line.indexOf(this.formula) >= 0
+			).join(`\n`)
+
+			return content.indexOf('started') >= 0
+		})
 	}
 
 	start() {
