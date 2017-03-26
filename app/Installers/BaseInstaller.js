@@ -20,6 +20,10 @@ export class BaseInstaller {
 		throw new Error('Subclasses must implement.')
 	}
 
+	update() {
+		return this.install()
+	}
+
 	isService() {
 		return false
 	}

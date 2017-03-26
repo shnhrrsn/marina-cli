@@ -28,6 +28,10 @@ export class BaseBrewInstaller extends BaseInstaller {
 		return this.exec(`brew install ${this.formula}`)
 	}
 
+	update() {
+		return this.exec(`brew upgrade ${this.formula}`)
+	}
+
 	async uninstall() {
 		if(this.isBrewService) {
 			await this.removeFile(this.sudoerServiceFile)

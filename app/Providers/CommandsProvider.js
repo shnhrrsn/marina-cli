@@ -9,6 +9,7 @@ import 'App/Commands/StartCommand'
 import 'App/Commands/StopCommand'
 import 'App/Commands/UndockCommand'
 import 'App/Commands/UninstallCommand'
+import 'App/Commands/UpdateCommand'
 
 export async function CommandsProvider(app) {
 	app.cli.commands.length = 0
@@ -23,5 +24,6 @@ export async function CommandsProvider(app) {
 		app.cli.register(StartCommand)
 		app.cli.register(StopCommand)
 		app.cli.register(UndockCommand)
+		app.cli.register(UpdateCommand)
 	}
 }
