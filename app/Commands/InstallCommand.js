@@ -24,9 +24,27 @@ export class InstallCommand extends BaseCommand {
 
 		const home = this.app.paths.home()
 		const hosts = this.app.paths.hosts()
-		await ChildProcess.exec(`sudo -u "${process.env.SUDO_USER}" mkdir -p "${home}" "${hosts}"`)
-		await FS.copy(this.app.paths.resources('config/Caddyfile'), path.join(home, 'Caddyfile'))
-		await FS.mkdirs('/etc/sudoers.d')
+
+		const Caddyfile = {
+			source: this.app.paths.resources('config/Caddyfile'),
+			destination: path.join(home, 'Caddyfile')
+		}
+
+		const execAsUser = args => ChildProcess.exec(
+			`sudo -u "${process.env.SUDO_USER}" ${args}`
+		)
+
+		if(await FS.exists(Caddyfile.destination)) {
+			// Works around a bug in earlier versions of Marina
+			// where Caddyfile was copied as root
+			await FS.unlink(Caddyfile.destination)
+		}
+
+		await Promise.all([
+			execAsUser(`mkdir -p "${home}" "${hosts}"`),
+			execAsUser(`cp "${Caddyfile.source}" "${Caddyfile.destination}"`),
+			FS.mkdirs('/etc/sudoers.d')
+		])
 
 		for(const installerClass of Installers) {
 			const installer = new installerClass(this.app)
