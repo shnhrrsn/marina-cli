@@ -3,15 +3,13 @@
 http://{{ domain }} {
 	proxy / {{ proxy }} {
 		transparent
-		fail_timeout 1s
-		max_fails 0
+		fail_timeout 0s
 	}
 }
 
 # https://{{ domain }} {
 # 	proxy / {{ proxy }} {
 # 		transparent
-# 		fail_timeout 1s
-# 		max_fails 0
+# 		fail_timeout 0s
 # 	}
 # }
