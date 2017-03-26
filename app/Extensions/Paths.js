@@ -1,5 +1,5 @@
 import { Paths as BasePaths } from 'grind-framework'
-import path from 'path'
+const path = require('path')
 
 export class Paths extends BasePaths {
 	_resources = null

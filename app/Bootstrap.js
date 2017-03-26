@@ -1,8 +1,8 @@
 require('babel-polyfill')
 
 import Grind from 'grind-framework'
+import { ViewProvider } from 'grind-view'
 
-import 'App/Providers/ViewProvider'
 import 'App/Extensions/Paths'
 
 const app = new Grind({

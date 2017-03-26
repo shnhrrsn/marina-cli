@@ -9,18 +9,11 @@ strip_babel() {
 }
 
 echo "Cleaning up old build"
-rm -fr build
+rm -fr lib
 
 echo "Building"
-mkdir build build/app build/boot
-babel -s inline -d build/app/ app/
-babel -s inline -d build/boot/ boot/
-
-echo "Setting up bins"
-cp -R bin build/bin
-rm build/bin/build build/bin/lint
-
-strip_babel build/bin/cli
-chmod +x build/bin/* build/bin/.init
+mkdir -p lib lib/app lib/boot
+babel -s inline -d lib/app/ app/ --copy-files
+babel -s inline -d lib/boot/ boot/ --copy-files
 
 echo "Done"

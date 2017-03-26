@@ -1,8 +1,8 @@
 import 'App/Commands/BaseCommand'
-import 'App/Support/FS'
 import 'App/Installers/CaddyInstaller'
 
-import Path from 'path'
+import { FS } from 'grind-support'
+const path = require('path')
 
 export class BaseDockCommand extends BaseCommand {
 	domainPrompt = 'What should the domain be for this project?'
@@ -13,7 +13,7 @@ export class BaseDockCommand extends BaseCommand {
 	caddy = null
 
 	async ready() {
-		this.savePath = Path.join(process.env.ORIGINAL_WD, '.marina.json')
+		this.savePath = path.join(process.env.ORIGINAL_WD, '.marina.json')
 		this.saved = await FS.exists(this.savePath).then(exists => exists ? require(this.savePath) : { })
 		this.domain = this.option('domain') || this.saved.domain
 

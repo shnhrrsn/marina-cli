@@ -1,5 +1,6 @@
 import 'App/Commands/BaseCommand'
-import 'App/Support/FS'
+
+import { FS } from 'grind-support'
 
 export class ListCommand extends BaseCommand {
 	name = 'list'

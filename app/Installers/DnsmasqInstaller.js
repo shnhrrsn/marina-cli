@@ -1,5 +1,5 @@
 import 'App/Installers/BaseBrewInstaller'
-import Path from 'path'
+const path = require('path')
 
 const CONFIG_PATH = '/usr/local/etc/dnsmasq.conf'
 const EXAMPLE_CONFIG_PATH = '/usr/local/opt/dnsmasq/dnsmasq.conf.example'
@@ -69,7 +69,7 @@ export class DnsmasqInstaller extends BaseBrewInstaller {
 	}
 
 	get resolverPath() {
-		return Path.join(RESOLVER_DIR, 'dev')
+		return path.join(RESOLVER_DIR, 'dev')
 	}
 
 	get localConfigPath() {

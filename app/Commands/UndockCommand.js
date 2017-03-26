@@ -1,14 +1,18 @@
 import 'App/Commands/BaseDockCommand'
-import 'App/Support/FS'
+
+import { FS } from 'grind-support'
+import { InputOption } from 'grind-cli'
 
 export class UndockCommand extends BaseDockCommand {
 	name = 'undock'
 	description = 'Unregister the a project with Marina'
 	domainPrompt = 'What domain do you want to unregister?'
-	options = {
-		domain: [ 'Domain', 'string' ],
-		save: 'Remove existing .marina.json file.'
-	}
+
+	options = [
+		new InputOption('domain', InputOption.VALUE_OPTIONAL, 'Domain'),
+		new InputOption('source', InputOption.VALUE_OPTIONAL, 'Source host'),
+		new InputOption('save', InputOption.VALUE_NONE, 'Remove existing .marina.json file.')
+	]
 
 	async run() {
 		const exists = await FS.exists(this.configPath)

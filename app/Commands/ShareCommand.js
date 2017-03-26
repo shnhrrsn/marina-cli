@@ -1,15 +1,18 @@
 import 'App/Commands/BaseDockCommand'
-import 'App/Support/FS'
 
-import ChildProcess from 'child-process-promise'
+import { FS } from 'grind-support'
+import { InputOption } from 'grind-cli'
+
+const ChildProcess = require('child-process-promise')
 
 export class ShareCommand extends BaseDockCommand {
 	name = 'share'
 	description = 'Generate a shareable URL for a project.'
 	domainPrompt = 'What domain do you want to share?'
-	options = {
-		domain: [ 'Domain', 'string' ],
-	}
+
+	options = [
+		new InputOption('domain', InputOption.VALUE_OPTIONAL, 'Domain')
+	]
 
 	async run() {
 		const exists = await FS.exists(this.configPath)

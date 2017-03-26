@@ -1,5 +1,4 @@
-import 'App/Support/FS'
-
+import { FS } from 'grind-support'
 import ChildProcess from 'child-process-promise'
 
 export class BaseInstaller {
@@ -56,7 +55,7 @@ export class BaseInstaller {
 	}
 
 	writeFile(file, lines) {
-		return FS.writeFile(file, `${lines.join(`\n`)}\n`)
+		return FS.writeFile(file, `${lines.join('\n')}\n`)
 	}
 
 	copyFile(source, target) {
@@ -78,17 +77,17 @@ export class BaseInstaller {
 	exec(command, options) {
 		if(process.env.USER === 'root') {
 			return ChildProcess.exec(`sudo -u "${process.env.SUDO_USER}" ${command}`, options)
-		} else {
-			return ChildProcess.exec(command, options)
 		}
+
+		return ChildProcess.exec(command, options)
 	}
 
 	sudo(command, options) {
 		if(process.env.USER === 'root') {
 			return ChildProcess.exec(command, options)
-		} else {
-			return ChildProcess.exec(`sudo ${command}`, options)
 		}
+
+		return ChildProcess.exec(`sudo ${command}`, options)
 	}
 
 }

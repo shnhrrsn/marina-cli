@@ -1,14 +1,17 @@
 import 'App/Commands/BaseDockCommand'
-import 'App/Support/FS'
+
+import { InputOption } from 'grind-cli'
+import { FS } from 'grind-support'
 
 export class DockCommand extends BaseDockCommand {
 	name = 'dock'
 	description = 'Register the a project with Marina'
-	options = {
-		domain: [ 'Domain', 'string' ],
-		source: [ 'Source host', 'string' ],
-		save: 'Save to .marina.json file for seamless referencing later.'
-	}
+
+	options = [
+		new InputOption('domain', InputOption.VALUE_OPTIONAL, 'Domain'),
+		new InputOption('source', InputOption.VALUE_OPTIONAL, 'Source host'),
+		new InputOption('save', InputOption.VALUE_NONE, 'Save to .marina.json file for seamless referencing later.')
+	]
 
 	async run() {
 		const exists = await FS.exists(this.configPath)
