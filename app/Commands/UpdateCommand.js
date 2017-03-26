@@ -1,8 +1,6 @@
 import 'App/Commands/BaseCommand'
 import 'App/Installers'
 
-const ChildProcess = require('child-process-promise')
-
 export class UpdateCommand extends BaseCommand {
 	name = 'update'
 	description = 'Update the Marina toolchain'
@@ -15,7 +13,7 @@ export class UpdateCommand extends BaseCommand {
 		}
 
 		Log.comment('Updating brew formulas')
-		await ChildProcess.exec(`sudo -u "${process.env.SUDO_USER}" brew update`)
+		await this.execAsUser('brew update')
 
 		for(const installerClass of Installers) {
 			const installer = new installerClass(this.app)

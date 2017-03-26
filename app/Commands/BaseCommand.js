@@ -26,4 +26,16 @@ export class BaseCommand extends Command {
 		return ChildProcess.exec(`/usr/bin/which "${command}"`).then(() => true).catch(() => false)
 	}
 
+	exec(command, options) {
+		return ChildProcess.exec(command, options)
+	}
+
+	execAsUser(command, options) {
+		if(process.env.USER !== 'root') {
+			return this.exec(command, options)
+		}
+
+		return this.exec(`sudo -u "${process.env.SUDO_USER}" ${command}`, options)
+	}
+
 }

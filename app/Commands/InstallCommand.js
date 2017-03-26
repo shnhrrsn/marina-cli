@@ -4,7 +4,6 @@ import 'App/Installers'
 import { FS } from 'grind-support'
 
 const path = require('path')
-const ChildProcess = require('child-process-promise')
 
 export class InstallCommand extends BaseCommand {
 	name = 'install'
@@ -30,10 +29,6 @@ export class InstallCommand extends BaseCommand {
 			destination: path.join(home, 'Caddyfile')
 		}
 
-		const execAsUser = args => ChildProcess.exec(
-			`sudo -u "${process.env.SUDO_USER}" ${args}`
-		)
-
 		if(await FS.exists(Caddyfile.destination)) {
 			// Works around a bug in earlier versions of Marina
 			// where Caddyfile was copied as root
@@ -41,8 +36,8 @@ export class InstallCommand extends BaseCommand {
 		}
 
 		await Promise.all([
-			execAsUser(`mkdir -p "${home}" "${hosts}"`),
-			execAsUser(`cp "${Caddyfile.source}" "${Caddyfile.destination}"`),
+			this.execAsUser(`mkdir -p "${home}" "${hosts}"`),
+			this.execAsUser(`cp "${Caddyfile.source}" "${Caddyfile.destination}"`),
 			FS.mkdirs('/etc/sudoers.d')
 		])
 
