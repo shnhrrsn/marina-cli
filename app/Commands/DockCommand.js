@@ -14,9 +14,7 @@ export class DockCommand extends BaseDockCommand {
 	]
 
 	async run() {
-		const exists = await FS.exists(this.configPath)
-
-		if(exists && this.saved.domain !== this.domain) {
+		if(await FS.exists(this.configPath) && this.saved.domain !== this.domain) {
 			this.error('--> This domain already exists.')
 			process.exit(1)
 		}

@@ -10,22 +10,15 @@ export class UninstallCommand extends BaseCommand {
 		for(const installerClass of Installers) {
 			const installer = new installerClass(this.app)
 			const name = installer.constructor.name.replace(/Installer$/, '')
-			const isInstalled = await installer.isInstalled()
 
-			if(!isInstalled) {
+			if(!(await installer.isInstalled())) {
 				Log.comment('Not installed, skipping', name)
 				continue
 			}
 
-			const isService = await installer.isService()
-
-			if(isService) {
-				const isRunning = await installer.isRunning()
-
-				if(isRunning) {
-					Log.comment('Stopping', name)
-					await installer.stop(this.app)
-				}
+			if(await installer.isService() && await installer.isRunning()) {
+				Log.comment('Stopping', name)
+				await installer.stop()
 			}
 
 			Log.comment('Uninstalling', name)

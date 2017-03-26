@@ -12,16 +12,12 @@ export class InstallCommand extends BaseCommand {
 	wantsSudo = true
 
 	async run() {
-		const brewExists = await this.checkIfCommandExists('brew')
-
-		if(!brewExists) {
+		if(!(await this.checkIfCommandExists('brew'))) {
 			this.error('Please install brew before proceeding: http://brew.sh')
 			process.exit(1)
 		}
 
-		const valetExists = await this.checkIfCommandExists('valet')
-
-		if(valetExists) {
+		if(await this.checkIfCommandExists('valet')) {
 			this.error('Marina is not compatible with Laravel Valet, uninstall before proceeding.')
 			process.exit(1)
 		}
@@ -35,9 +31,8 @@ export class InstallCommand extends BaseCommand {
 		for(const installerClass of Installers) {
 			const installer = new installerClass(this.app)
 			const name = installer.constructor.name.replace(/Installer$/, '')
-			const isInstalled = await installer.isInstalled()
 
-			if(isInstalled) {
+			if(await installer.isInstalled()) {
 				Log.comment('Already installed', name)
 				continue
 			}
@@ -45,21 +40,11 @@ export class InstallCommand extends BaseCommand {
 			Log.comment('Installing', name)
 			await installer.install()
 
-			const isService = await installer.isService()
-
-			if(isService) {
-				const isRunning = await installer.isRunning()
-
-				if(!isRunning) {
-					Log.comment('--> Starting', name)
-					await installer.start(this.app)
-				}
+			if(await installer.isService() && !(await installer.isRunning())) {
+				Log.comment('--> Starting', name)
+				await installer.start()
 			}
 		}
-	}
-
-	checkIfCommandExists(command) {
-		return ChildProcess.exec(`/usr/bin/which "${command}"`).then(() => true).catch(() => false)
 	}
 
 }

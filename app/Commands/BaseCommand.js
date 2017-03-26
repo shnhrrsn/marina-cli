@@ -1,5 +1,7 @@
 import { Command } from 'grind-cli'
 
+const ChildProcess = require('child-process-promise')
+
 export class BaseCommand extends Command {
 	wantsSudo = false
 
@@ -18,6 +20,10 @@ export class BaseCommand extends Command {
 		}
 
 		return super.ready()
+	}
+
+	checkIfCommandExists(command) {
+		return ChildProcess.exec(`/usr/bin/which "${command}"`).then(() => true).catch(() => false)
 	}
 
 }

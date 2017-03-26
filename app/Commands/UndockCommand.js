@@ -15,9 +15,7 @@ export class UndockCommand extends BaseDockCommand {
 	]
 
 	async run() {
-		const exists = await FS.exists(this.configPath)
-
-		if(!exists) {
+		if(!(await FS.exists(this.configPath))) {
 			this.error('--> This domain does not exist.')
 			process.exit(1)
 		}
@@ -31,7 +29,7 @@ export class UndockCommand extends BaseDockCommand {
 			await FS.unlink(this.savePath)
 		}
 
-		this.success('Done')
+		this.success('--> Done')
 	}
 
 }

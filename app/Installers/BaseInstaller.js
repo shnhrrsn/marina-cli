@@ -58,10 +58,6 @@ export class BaseInstaller {
 		return FS.writeFile(file, `${lines.join('\n')}\n`)
 	}
 
-	copyFile(source, target) {
-		return FS.copy(source, target)
-	}
-
 	removeFile(file) {
 		return FS.unlink(file).catch(err => Log.error(`Unable to remove ${file}`, err))
 	}
