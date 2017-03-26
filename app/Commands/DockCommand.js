@@ -5,7 +5,7 @@ import { FS } from 'grind-support'
 
 export class DockCommand extends BaseDockCommand {
 	name = 'dock'
-	description = 'Register the a project with Marina'
+	description = 'Register a project with Marina'
 
 	options = [
 		new InputOption('domain', InputOption.VALUE_OPTIONAL, 'Domain'),

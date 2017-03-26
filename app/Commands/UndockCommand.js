@@ -5,7 +5,7 @@ import { InputOption } from 'grind-cli'
 
 export class UndockCommand extends BaseDockCommand {
 	name = 'undock'
-	description = 'Unregister the a project with Marina'
+	description = 'Unregister a project with Marina'
 	domainPrompt = 'What domain do you want to unregister?'
 
 	options = [
