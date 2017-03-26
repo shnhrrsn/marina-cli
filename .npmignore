@@ -9,3 +9,5 @@
 build
 node_modules
 npm-debug.log
+yarn.lock
+.marina.json

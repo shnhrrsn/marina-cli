@@ -1,3 +1,4 @@
 node_modules/
 lib/
-database.sqlite
+yarn.lock
+.marina.json
