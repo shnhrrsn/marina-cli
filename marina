@@ -4,7 +4,7 @@ export ORIGINAL_WD=$(pwd)
 cd "`dirname "$BASH_SOURCE"`"
 
 if [[ -L "$BASH_SOURCE" ]]; then
-	cd $(dirname $(readlink /usr/local/bin/marina))
+	cd $(dirname $(readlink $BASH_SOURCE))
 fi
 
 NODE=$(which node)
