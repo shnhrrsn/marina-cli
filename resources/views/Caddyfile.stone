@@ -3,6 +3,7 @@
 http://{{ domain }} {
 	proxy / {{ proxy }} {
 		transparent
+		websocket
 		fail_timeout 0s
 	}
 }
@@ -10,6 +11,7 @@ http://{{ domain }} {
 # https://{{ domain }} {
 # 	proxy / {{ proxy }} {
 # 		transparent
+# 		websocket
 # 		fail_timeout 0s
 # 	}
 # }
