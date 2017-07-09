@@ -9,6 +9,6 @@ const app = new Grind({
 	pathsClass: Paths
 })
 
-app.providers.push(ViewProvider)
+app.providers.add(ViewProvider)
 
 module.exports = app

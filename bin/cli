@@ -12,7 +12,7 @@ NODE_VERSION=$(node -v)
 NODE_VERSION=$(echo ${NODE_VERSION#*v} | cut -d. -f1)
 
 FLAGS=""
-if [ "$NODE_VERSION" -gt "6" ]; then
+if [ "$NODE_VERSION" = "7" ]; then
 	FLAGS="--harmony-async-await"
 fi
 
