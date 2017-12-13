@@ -1,3 +1,4 @@
 node_modules/
 lib/
 .marina.json
+.DS_Store

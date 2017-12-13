@@ -21,7 +21,7 @@ export class BaseDockCommand extends BaseCommand {
 			this.domain = await this.ask(this.domainPrompt)
 		}
 
-		this.domain = `${this.domain.toLowerCase().replace(/\.dev$/g, '')}.dev`
+		this.domain = `${this.domain.toLowerCase().replace(/\.localhost$/g, '')}.localhost`
 		this.configPath = this.app.paths.hosts(`${this.domain}.conf`)
 
 		this.caddy = new CaddyInstaller(this.app)

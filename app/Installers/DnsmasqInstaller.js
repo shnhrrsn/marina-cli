@@ -45,7 +45,7 @@ export class DnsmasqInstaller extends BaseBrewInstaller {
 
 		if(!localConfigExists) {
 			// NOTE: Not using writeFile here because it will write as root, not user
-			await this.exec(`bash -c "echo 'address=/.dev/127.0.0.1' > '${this.localConfigPath}'"`)
+			await this.exec(`bash -c "echo 'address=/.localhost/127.0.0.1' > '${this.localConfigPath}'"`)
 		}
 
 		let config = await this.readFile(CONFIG_PATH)
@@ -69,7 +69,7 @@ export class DnsmasqInstaller extends BaseBrewInstaller {
 	}
 
 	get resolverPath() {
-		return path.join(RESOLVER_DIR, 'dev')
+		return path.join(RESOLVER_DIR, 'localhost')
 	}
 
 	get localConfigPath() {
