@@ -9,7 +9,7 @@ DIR=/tmp/marina-caddy
 mkdir -p $DIR
 pushd $DIR
 
-curl -L 'https://caddyserver.com/download/darwin/amd64' > caddy.zip
+curl -L 'https://caddyserver.com/download/darwin/amd64?license=personal' > caddy.zip
 unzip caddy.zip
 mv caddy "$1"
 
