@@ -1,14 +1,14 @@
-require('babel-polyfill')
-
-import Grind from 'grind-framework'
+import { Application } from 'grind-framework'
 import { ViewProvider } from 'grind-view'
 
 import 'App/Extensions/Paths'
 
-const app = new Grind({
-	pathsClass: Paths
-})
+export function Bootstrap(kernelClass) {
+	const app = new Application(kernelClass, {
+		pathsClass: Paths
+	})
 
-app.providers.add(ViewProvider)
+	app.providers.add(ViewProvider)
 
-module.exports = app
+	return app
+}
