@@ -1,5 +1,10 @@
 # marina-cli
 
+<a href="https://travis-ci.org/shnhrrsn/marina-cli"><img src="https://img.shields.io/travis/shnhrrsn/marina-cli.svg" alt="Build Status"></a>
+<a href="https://www.npmjs.com/package/marina-cli"><img src="https://img.shields.io/npm/dt/marina-cli.svg" alt="Total Downloads"></a>
+<a href="https://www.npmjs.com/package/marina-cli"><img src="https://img.shields.io/npm/v/marina-cli.svg" alt="Latest Version"></a>
+<a href="https://www.npmjs.com/package/marina-cli"><img src="https://img.shields.io/npm/l/marina-cli.svg" alt="License"></a>
+
 Marina is a CLI tool to provide simple, shareable domains by creating a reverse proxy with [Caddy](https://caddyserver.com) and serving `*.localhost` via Dnsmasq.  No need to mess with hosts files, quickly and easily turn `http://localhost:3000` into `http://domain.localhost`.
 
 Marina also integrates with [ngrok](https://ngrok.com) allowing you to create a publicly shareable link with a simple `marina share` command.
@@ -17,8 +22,8 @@ sudo marina install
 
 ### Managing Settings
 * `domain`: Change the default domain TLD from `.localhost`
-* `ssl:on`: Turn support for ssl on
-* `ssl:off`: Turn support for ssl off
+* `ssl on`: Turn support for ssl on
+* `ssl off`: Turn support for ssl off
 
 #### Managing Projects
 * `dock`: Register a project with Marina
