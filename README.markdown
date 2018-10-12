@@ -15,6 +15,11 @@ sudo marina install
 
 ## Usage
 
+### Managing Settings
+* `domain`: Change the default domain TLD from `.localhost`
+* `ssl:on`: Turn support for ssl on
+* `ssl:off`: Turn support for ssl off
+
 #### Managing Projects
 * `dock`: Register a project with Marina
 * `list`: Lists all registered domains.
