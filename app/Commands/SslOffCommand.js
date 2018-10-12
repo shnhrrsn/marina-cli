@@ -51,7 +51,7 @@ export class SslOffCommand extends BaseCommand {
 		})
 
 		Log.comment('Restarting Caddy')
-		await (new CaddyInstaller).stop()
+		await (new CaddyInstaller).restart()
 
 		Log.success('Done')
 	}
