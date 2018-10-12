@@ -1,4 +1,4 @@
-import { Command } from 'grind-cli'
+import { Command, AbortError } from 'grind-cli'
 
 const ChildProcess = require('child-process-promise')
 
@@ -9,15 +9,12 @@ export class BaseCommand extends Command {
 	ready() {
 		if(this.wantsSudo) {
 			if(process.env.USER !== 'root') {
-				this.error('This command must be ran via sudo.')
-				process.exit(1)
+				throw new AbortError('This command must be ran via sudo.')
 			} else if(process.env.SUDO_USER.isNil || process.env.USER === process.env.SUDO_USER) {
-				this.error('This command must be ran via sudo, not as root.')
-				process.exit(1)
+				throw new AbortError('This command must be ran via sudo, not as root.')
 			}
 		} else if(process.env.USER === 'root') {
-			this.error('This command can not be ran as root.')
-			process.exit(1)
+			throw new AbortError('This command can not be ran as root.')
 		}
 
 		return super.ready()

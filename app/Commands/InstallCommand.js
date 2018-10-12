@@ -2,6 +2,7 @@ import 'App/Commands/BaseCommand'
 import 'App/Installers'
 
 import { FS } from 'grind-support'
+import { AbortError } from 'grind-cli'
 
 const path = require('path')
 
@@ -13,20 +14,18 @@ export class InstallCommand extends BaseCommand {
 
 	async run() {
 		if(!(await this.checkIfCommandExists('brew'))) {
-			this.error('Please install brew before proceeding: http://brew.sh')
-			process.exit(1)
+			throw new AbortError('Please install brew before proceeding: http://brew.sh')
 		}
 
 		if(await this.checkIfCommandExists('valet')) {
-			this.error('Marina is not compatible with Laravel Valet, uninstall before proceeding.')
-			process.exit(1)
+			throw new AbortError('Marina is not compatible with Laravel Valet, uninstall before proceeding.')
 		}
 
 		const home = this.app.paths.home()
 		const hosts = this.app.paths.hosts()
 
 		const Caddyfile = {
-			source: this.app.paths.resources('config/Caddyfile'),
+			source: this.app.paths.resources('config/main.caddyfile'),
 			destination: path.join(home, 'Caddyfile')
 		}
 

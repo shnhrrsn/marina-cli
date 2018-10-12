@@ -3,7 +3,7 @@ import 'App/Commands/BaseCommand'
 import 'App/Installers'
 import 'App/Support/Site'
 
-import { InputOption } from 'grind-cli'
+import { InputOption, AbortError } from 'grind-cli'
 
 export class UpdateCommand extends BaseCommand {
 
@@ -23,8 +23,7 @@ export class UpdateCommand extends BaseCommand {
 
 	async run() {
 		if(!(await this.checkIfCommandExists('brew'))) {
-			this.error('Please install brew before proceeding: http://brew.sh')
-			process.exit(1)
+			throw new AbortError('Please install brew before proceeding: http://brew.sh')
 		}
 
 		Log.comment('Updating brew formulas')

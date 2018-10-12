@@ -1,6 +1,6 @@
 import 'App/Commands/BaseDockCommand'
 
-import { InputOption } from 'grind-cli'
+import { InputOption, AbortError } from 'grind-cli'
 import { FS } from 'grind-support'
 
 export class DockCommand extends BaseDockCommand {
@@ -17,8 +17,7 @@ export class DockCommand extends BaseDockCommand {
 
 	async run() {
 		if(await FS.exists(this.site.configPath) && this.savedDomain !== this.site.domain) {
-			this.error('--> This domain already exists.')
-			process.exit(1)
+			throw new AbortError('This domain already exists.')
 		}
 
 		if(this.site.source.isNil) {
