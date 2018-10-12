@@ -3,6 +3,7 @@ import { Command } from 'grind-cli'
 const ChildProcess = require('child-process-promise')
 
 export class BaseCommand extends Command {
+
 	wantsSudo = false
 
 	ready() {

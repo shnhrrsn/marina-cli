@@ -4,6 +4,7 @@ import 'App/Installers/CaddyInstaller'
 import 'App/Installers/DnsmasqInstaller'
 
 export class StopCommand extends Command {
+
 	name = 'stop'
 	description = 'Stop Caddy & Dnsmasq'
 

@@ -2,7 +2,8 @@ import { FS } from 'grind-support'
 import ChildProcess from 'child-process-promise'
 
 export class BaseInstaller {
-	app = null
+
+	app
 
 	constructor(app) {
 		this.app = app

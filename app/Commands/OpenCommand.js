@@ -4,6 +4,7 @@ import { FS } from 'grind-support'
 import { InputOption } from 'grind-cli'
 
 export class OpenCommand extends BaseDockCommand {
+
 	name = 'open'
 	description = 'Opens a Marina project in the browser.'
 	domainPrompt = 'What domain do you want to open?'

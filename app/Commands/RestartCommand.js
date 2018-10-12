@@ -4,6 +4,7 @@ import 'App/Installers/CaddyInstaller'
 import 'App/Installers/DnsmasqInstaller'
 
 export class RestartCommand extends Command {
+
 	name = 'restart'
 	description = 'Restart Caddy & Dnsmasq'
 

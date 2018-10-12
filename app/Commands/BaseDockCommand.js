@@ -5,6 +5,7 @@ import { FS } from 'grind-support'
 const path = require('path')
 
 export class BaseDockCommand extends BaseCommand {
+
 	domainPrompt = 'What should the domain be for this project?'
 	savePath = null
 	saved = null

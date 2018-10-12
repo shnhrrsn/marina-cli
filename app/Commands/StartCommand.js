@@ -4,6 +4,7 @@ import 'App/Installers/CaddyInstaller'
 import 'App/Installers/DnsmasqInstaller'
 
 export class StartCommand extends Command {
+
 	name = 'start'
 	description = 'Start Caddy & Dnsmasq'
 

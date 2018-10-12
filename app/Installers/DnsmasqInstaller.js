@@ -6,6 +6,7 @@ const EXAMPLE_CONFIG_PATH = '/usr/local/opt/dnsmasq/dnsmasq.conf.example'
 const RESOLVER_DIR = '/etc/resolver'
 
 export class DnsmasqInstaller extends BaseBrewInstaller {
+
 	isBrewService = true
 	formula = 'dnsmasq'
 

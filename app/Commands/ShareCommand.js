@@ -6,6 +6,7 @@ import { InputOption } from 'grind-cli'
 const ChildProcess = require('child-process-promise')
 
 export class ShareCommand extends BaseDockCommand {
+
 	name = 'share'
 	description = 'Generate a shareable URL for a project.'
 	domainPrompt = 'What domain do you want to share?'

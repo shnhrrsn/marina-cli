@@ -2,6 +2,7 @@ import 'App/Commands/BaseCommand'
 import 'App/Installers'
 
 export class UninstallCommand extends BaseCommand {
+
 	name = 'uninstall'
 	description = 'Uninstall the Marina toolchain'
 	wantsSudo = true

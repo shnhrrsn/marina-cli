@@ -6,6 +6,7 @@ import { FS } from 'grind-support'
 const path = require('path')
 
 export class InstallCommand extends BaseCommand {
+
 	name = 'install'
 	description = 'Install the Marina toolchain'
 	wantsSudo = true

@@ -3,6 +3,7 @@ import 'App/Commands/BaseCommand'
 import { FS } from 'grind-support'
 
 export class ListCommand extends BaseCommand {
+
 	name = 'list'
 	description = 'Lists all registered domains.'
 

@@ -5,6 +5,7 @@ import { FS } from 'grind-support'
 import { InputOption } from 'grind-cli'
 
 export class UpdateCommand extends BaseCommand {
+
 	name = 'update'
 	description = 'Update the Marina toolchain'
 	wantsSudo = true

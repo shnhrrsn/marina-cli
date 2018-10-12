@@ -1,6 +1,7 @@
 import 'App/Installers/BaseInstaller'
 
 export class BaseBrewInstaller extends BaseInstaller {
+
 	isBrewService = false
 	formula = null
 

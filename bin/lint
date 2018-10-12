@@ -2,4 +2,4 @@
 
 const cli = require('eslint/lib/cli')
 process.chdir(require('path').join(__dirname, '..'))
-process.exitCode = cli.execute([ ...process.argv, 'app', 'boot', 'config' ])
+process.exitCode = cli.execute([ ...process.argv, 'app/', 'boot/' ])

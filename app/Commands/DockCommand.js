@@ -4,6 +4,7 @@ import { InputOption } from 'grind-cli'
 import { FS } from 'grind-support'
 
 export class DockCommand extends BaseDockCommand {
+
 	name = 'dock'
 	description = 'Register a project with Marina'
 

@@ -1,10 +1,12 @@
-import { Paths as BasePaths } from 'grind-framework'
+import { Paths as GrindPaths } from 'grind-framework'
+
 const path = require('path')
 
-export class Paths extends BasePaths {
-	_resources = null
-	_home = null
-	_hosts = null
+export class Paths extends GrindPaths {
+
+	_resources
+	_home
+	_hosts
 
 	constructor(bootstrapper) {
 		super(bootstrapper)
