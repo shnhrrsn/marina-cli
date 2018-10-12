@@ -1,6 +1,6 @@
 {
   "name": "marina-cli",
-  "version": "3.0.0-beta.2",
+  "version": "3.0.0-beta.3",
   "description": "Marina is a CLI tool to provide simple, shareable domains for your dev environment.",
   "author": "Shaun Harrison (@shnhrrsn)",
   "license": "MIT",
