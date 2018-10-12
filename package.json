@@ -21,6 +21,7 @@
   },
   "dependencies": {
     "@babel/polyfill": "^7.0.0",
+    "chalk": "^2.4.1",
     "child-process-promise": "^2.2.1",
     "grind-cli": "^0.8.0-beta.3",
     "grind-framework": "^0.8.0-beta.1",
