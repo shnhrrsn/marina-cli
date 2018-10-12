@@ -28,4 +28,8 @@ export class Paths extends GrindPaths {
 		return this._join(this._hosts, ...args)
 	}
 
+	get settings() {
+		return this.home('marina.json')
+	}
+
 }
