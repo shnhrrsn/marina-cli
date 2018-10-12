@@ -7,6 +7,7 @@ export class DockCommand extends BaseDockCommand {
 
 	name = 'dock'
 	description = 'Register a project with Marina'
+	requiresExistence = false
 
 	options = [
 		new InputOption('domain', InputOption.VALUE_OPTIONAL, 'Domain'),
@@ -15,38 +16,28 @@ export class DockCommand extends BaseDockCommand {
 	]
 
 	async run() {
-		if(await FS.exists(this.configPath) && this.saved.domain !== this.domain) {
+		if(await FS.exists(this.site.configPath) && this.savedDomain !== this.site.domain) {
 			this.error('--> This domain already exists.')
 			process.exit(1)
 		}
 
-		let proxy = this.option('source') || this.saved.source
-
-		if(proxy.isNil) {
-			proxy = await this.ask('What is the source host for this project?')
+		if(this.site.source.isNil) {
+			this.site.source = await this.ask('What is the source host for this project?')
 		}
 
-		proxy = proxy.replace(/^(.+?):\/\//, '').split('/')[0]
+		this.site.source = this.site.source.replace(/^(.+?):\/\//, '').split('/')[0]
 
-		const content = await this.app.view.render('Caddyfile', {
-			domain: this.domain,
-			proxy: proxy
-		})
+		await this.site.save()
 
-		await FS.writeFile(this.configPath, content)
-
-		if(this.option('save') === true || !this.saved.domain.isNil) {
-			await FS.writeFile(this.savePath, JSON.stringify({
-				domain: this.domain,
-				source: proxy
-			}, null, '  '))
+		if(this.option('save') === true || !this.savedDomain.isNil) {
+			await FS.writeFile(this.savePath, JSON.stringify(this.site, null, 2))
 		}
 
 		this.comment('Restarting')
 		await this.caddy.restart()
 
 		this.success('--> Done')
-		this.success(`--> http://${this.domain}`)
+		this.success(`--> http://${this.site.fqdn}`)
 	}
 
 }

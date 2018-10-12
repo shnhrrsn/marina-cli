@@ -1,9 +1,8 @@
 import 'App/Commands/BaseCommand'
 
 import 'App/Installers'
-import 'App/Installers/CaddyInstaller'
+import 'App/Support/Site'
 
-import { FS } from 'grind-support'
 import { InputOption } from 'grind-cli'
 
 export class UpdateCommand extends BaseCommand {
@@ -33,11 +32,10 @@ export class UpdateCommand extends BaseCommand {
 
 		if(!this.option('preserve-caddyfiles')) {
 			Log.comment('Updating Caddyfiles')
-			const caddy = new CaddyInstaller(this.app)
-			await caddy.forEachHost(async(file, { domain, proxy }) => {
-				Log.comment('Updating', domain)
-				const content = await this.app.view.render('Caddyfile', { domain, proxy })
-				await FS.writeFile(this.app.paths.hosts(file), content)
+
+			await Site.forEach(this.app, (file, site) => {
+				Log.comment('Updating', site.fqdn)
+				return site.save()
 			})
 		}
 

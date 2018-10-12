@@ -1,6 +1,5 @@
 import 'App/Commands/BaseDockCommand'
 
-import { FS } from 'grind-support'
 import { InputOption } from 'grind-cli'
 
 export class OpenCommand extends BaseDockCommand {
@@ -14,12 +13,7 @@ export class OpenCommand extends BaseDockCommand {
 	]
 
 	async run() {
-		if(!(await FS.exists(this.configPath))) {
-			this.error('--> This domain does not exist.')
-			process.exit(1)
-		}
-
-		return this.exec(`open "http://${this.domain}"`)
+		return this.exec(`open "http://${this.site.fqdn}"`)
 	}
 
 }

@@ -16,17 +16,12 @@ export class UndockCommand extends BaseDockCommand {
 	]
 
 	async run() {
-		if(!(await FS.exists(this.configPath))) {
-			this.error('--> This domain does not exist.')
-			process.exit(1)
-		}
-
-		await FS.unlink(this.configPath)
+		await FS.unlink(this.site.configPath)
 
 		this.comment('Restarting')
 		await this.caddy.restart()
 
-		if(this.option('save') === true && this.saved.domain === this.domain) {
+		if(this.option('save') === true && this.savedDomain === this.site.domain) {
 			await FS.unlink(this.savePath)
 		}
 

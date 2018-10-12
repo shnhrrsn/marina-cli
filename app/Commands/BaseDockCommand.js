@@ -1,39 +1,58 @@
 import 'App/Commands/BaseCommand'
+
+import 'App/Errors/NonexistentDomainError'
 import 'App/Installers/CaddyInstaller'
+import 'App/Support/Site'
 
 import { FS } from 'grind-support'
+import { AbortError } from 'grind-cli'
+
 const path = require('path')
 
 export class BaseDockCommand extends BaseCommand {
 
 	domainPrompt = 'What should the domain be for this project?'
-	savePath = null
-	saved = null
-	domain = null
-	configPath = null
-	caddy = null
+	requiresExistence = true
+	site
+	savedDomain
+	caddy
 
 	async ready() {
-		this.savePath = path.join(process.env.ORIGINAL_WD, '.marina.json')
-		this.saved = await FS.exists(this.savePath).then(exists => exists ? require(this.savePath) : { })
-		this.domain = this.option('domain') || this.saved.domain
+		this.savePath = path.join(process.cwd(), '.marina.json')
 
-		if(this.domain.isNil) {
-			this.domain = await this.ask(this.domainPrompt)
+		this.site = null
+
+		if(await FS.exists(this.savePath)) {
+			try {
+				this.site = new Site(this.app, JSON.parse(await FS.readFile(this.savePath)))
+				this.savedDomain = this.site.domain
+			} catch(err) {
+				throw new AbortError('An existing config file as found in this directory, however it’s invalid.')
+			}
 		}
 
-		const tld = this.app.settings.$tld
-		const tldPattern = new RegExp(`\\.${tld}$`, 'g')
+		const options = { }
 
-		this.domain = `${this.domain.toLowerCase().replace(tldPattern, '')}.${tld}`
-		this.configPath = this.app.paths.hosts(`${this.domain}.conf`)
+		if(this.containsOption('domain')) {
+			options.domain = this.option('domain').toLowerCase()
+		}
+
+		if(options.domain.isNil && this.site.isNil) {
+			options.domain = await this.ask(this.domainPrompt)
+		}
+
+		if(this.site.isNil) {
+			this.site = new Site(this.app, options)
+		} else {
+			this.site.update(options)
+		}
+
+		if(this.requiresExistence && !(await FS.exists(this.site.configPath))) {
+			throw new NonexistentDomainError(this.site)
+		}
 
 		this.caddy = new CaddyInstaller(this.app)
 
-		return this._superReady()
-	}
-
-	_superReady() {
 		return super.ready()
 	}
 

@@ -3,6 +3,8 @@ import 'App/Commands/BaseCommand'
 import 'App/Installers/CaddyInstaller'
 import 'App/Installers/DnsmasqInstaller'
 
+import 'App/Support/Site'
+
 import { FS } from 'grind-support'
 import { InputArgument } from 'grind-cli'
 
@@ -49,19 +51,18 @@ export class DomainCommand extends BaseCommand {
 
 		const caddy = new CaddyInstaller(this.app)
 		this.comment('Updating existing hosts')
-		const stripTldPattern = new RegExp(`\\.${old}$`)
+		this.app.settings.tld = old
 
-		await caddy.forEachHost(async(file, { domain, proxy }) => {
-			const newDomain = `${domain.replace(stripTldPattern, '')}.${tld}`
+		await Site.forEach(this.app, async(file, site) => {
+			this.app.settings.tld = tld
+			const domain = site.domain
 
-			this.comment(`Renaming ${domain} to ${newDomain}`)
-			const content = await this.app.view.render('Caddyfile', { domain: newDomain, proxy })
-			const newFile = this.app.paths.hosts(`${newDomain}.conf`)
-			await FS.writeFile(newFile, content)
-			await FS.chown(newFile, Number(process.env.SUDO_UID), Number(process.env.SUDO_GID))
-
+			this.comment(`Renaming ${domain}.${old} to ${site.fqdn}`)
+			await site.save()
 			await FS.unlink(this.app.paths.hosts(file))
+			this.app.settings.tld = old
 		})
+		this.app.settings.tld = tld
 
 		this.comment('Restarting', caddy.constructor.name)
 		await caddy.restart()
