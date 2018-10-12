@@ -38,6 +38,10 @@ export class DockCommand extends BaseDockCommand {
 
 		this.success('--> Done')
 		this.success(`--> http://${this.site.fqdn}`)
+
+		for(const alias of this.site.fqAliases) {
+			this.success(`--> http://${alias}`)
+		}
 	}
 
 }

@@ -1,6 +1,7 @@
+@set(const domains, [ site.fqdn, ...site.fqAliases ])
 #config:{!! site.stringify() !!}
 
-{!! `http://${domain}` !!} {
+{!! domains.map(domain => `http://${domain}`).join(',\n') !!} {
 	proxy / {{ site.source }} {
 		transparent
 		websocket
@@ -8,7 +9,7 @@
 	}
 }
 
-# {!! `https://${domain}` !!} {
+# {!! domains.map(domain => `https://${domain}`).join(',\n# ') !!} {
 # 	proxy / {{ site.source }} {
 # 		transparent
 # 		websocket

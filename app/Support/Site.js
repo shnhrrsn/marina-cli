@@ -4,6 +4,7 @@ export class Site {
 
 	app
 	domain
+	aliases
 	source
 
 	constructor(app, options) {
@@ -44,6 +45,10 @@ export class Site {
 		}
 	}
 
+	get hasAliases() {
+		return Array.isArray(this.aliases) && this.aliases.length > 0
+	}
+
 	get configPath() {
 		return this.app.paths.hosts(`${this.fqdn}.conf`)
 	}
@@ -52,11 +57,23 @@ export class Site {
 		return `${this.domain}.${this.app.settings.$tld}`
 	}
 
-	update({ domain, proxy, source } = { }) {
+	get fqAliases() {
+		if(!this.hasAliases) {
+			return [ ]
+		}
+
+		return this.aliases.map(alias => `${alias}.${this.app.settings.$tld}`)
+	}
+
+	update({ domain, aliases, proxy, source } = { }) {
 		const stripTldPattern = new RegExp(`\\.${this.app.settings.$tld}$`)
 
 		if(typeof domain === 'string') {
 			this.domain = domain.replace(stripTldPattern, '')
+		}
+
+		if(Array.isArray(aliases)) {
+			this.aliases = aliases.map(alias => alias.replace(stripTldPattern, ''))
 		}
 
 		if(typeof proxy === 'string') {
@@ -85,6 +102,7 @@ export class Site {
 	toObject() {
 		return {
 			domain: this.domain,
+			aliases: Array.isArray(this.aliases) && this.aliases.length > 0 ? [ ...this.aliases ] : void 0,
 			source: this.source
 		}
 	}

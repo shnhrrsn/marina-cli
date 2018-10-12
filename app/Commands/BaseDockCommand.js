@@ -35,6 +35,12 @@ export class BaseDockCommand extends BaseCommand {
 
 		if(this.containsOption('domain')) {
 			options.domain = this.option('domain').toLowerCase()
+
+			if(options.domain.indexOf(',') >= 0) {
+				const domains = options.domain.split(/,/).map(domain => domain.trim())
+				options.domain = domains.shift()
+				options.aliases = domains
+			}
 		}
 
 		if(options.domain.isNil && this.site.isNil) {
