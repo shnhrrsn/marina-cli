@@ -1,6 +1,7 @@
 import { FS } from 'grind-support'
 
 import 'App/Commands/DockCommand'
+import 'App/Commands/DomainCommand'
 import 'App/Commands/InstallCommand'
 import 'App/Commands/ListCommand'
 import 'App/Commands/OpenCommand'
@@ -19,6 +20,7 @@ export async function CommandsProvider(app) {
 
 	if(await FS.exists(app.paths.home('Caddyfile'))) {
 		app.cli.register(DockCommand)
+		app.cli.register(DomainCommand)
 		app.cli.register(ListCommand)
 		app.cli.register(OpenCommand)
 		app.cli.register(RestartCommand)

@@ -34,6 +34,10 @@ export class DnsmasqInstaller extends BaseBrewInstaller {
 
 	async install() {
 		await super.install()
+		return this.setupConfig()
+	}
+
+	async setupConfig() {
 		const configExists = await this.configExists()
 
 		if(!configExists) {
