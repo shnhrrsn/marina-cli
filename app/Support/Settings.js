@@ -14,6 +14,10 @@ export class Settings {
 		return settings
 	}
 
+	get $tld() {
+		return this.tld || 'localhost'
+	}
+
 	async save() {
 		const json = Object.assign({ }, this)
 		delete json.$app

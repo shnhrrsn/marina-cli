@@ -11,7 +11,7 @@ export class DnsmasqInstaller extends BaseBrewInstaller {
 	formula = 'dnsmasq'
 
 	async isInstalled() {
-		const isInstalled = await this._superIsInstalled()
+		const isInstalled = await super.isInstalled()
 
 		if(!isInstalled) {
 			return false
@@ -33,8 +33,7 @@ export class DnsmasqInstaller extends BaseBrewInstaller {
 	}
 
 	async install() {
-		await this._superInstall()
-
+		await super.install()
 		const configExists = await this.configExists()
 
 		if(!configExists) {
@@ -46,7 +45,7 @@ export class DnsmasqInstaller extends BaseBrewInstaller {
 
 		if(!localConfigExists) {
 			// NOTE: Not using writeFile here because it will write as root, not user
-			await this.exec(`bash -c "echo 'address=/.localhost/127.0.0.1' > '${this.localConfigPath}'"`)
+			await this.exec(`bash -c "echo 'address=/.${this.app.settings.$tld}/127.0.0.1' > '${this.localConfigPath}'"`)
 		}
 
 		let config = await this.readFile(CONFIG_PATH)
@@ -70,19 +69,11 @@ export class DnsmasqInstaller extends BaseBrewInstaller {
 	}
 
 	get resolverPath() {
-		return path.join(RESOLVER_DIR, 'localhost')
+		return path.join(RESOLVER_DIR, this.app.settings.$tld)
 	}
 
 	get localConfigPath() {
 		return this.app.paths.home('dnsmasq.conf')
-	}
-
-	_superIsInstalled() {
-		return super.isInstalled()
-	}
-
-	_superInstall() {
-		return super.install()
 	}
 
 }
