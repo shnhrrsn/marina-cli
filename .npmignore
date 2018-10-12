@@ -8,6 +8,7 @@
 /boot/
 build
 node_modules
-npm-debug.log
+npm-*.log
+yarn-*.log
 yarn.lock
 .marina.json
