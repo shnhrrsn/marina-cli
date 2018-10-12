@@ -24,8 +24,12 @@ export class BaseCommand extends Command {
 		return ChildProcess.exec(`/usr/bin/which "${command}"`).then(() => true).catch(() => false)
 	}
 
-	exec(command, options) {
-		return ChildProcess.exec(command, options)
+	exec(...args) {
+		return ChildProcess.exec(...args)
+	}
+
+	execFile(...args) {
+		return ChildProcess.execFile(...args)
 	}
 
 	execAsUser(command, options) {

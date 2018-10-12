@@ -27,7 +27,9 @@
     "grind-framework": "^0.8.0-beta.1",
     "grind-stone": "^0.8.0-beta.9",
     "grind-support": "^0.8.0-beta.1",
-    "grind-view": "^0.8.0-beta.2"
+    "grind-view": "^0.8.0-beta.2",
+    "node-forge": "0.7.5",
+    "selfsigned": "^1.10.4"
   },
   "devDependencies": {
     "@babel/cli": "^7.1.2",

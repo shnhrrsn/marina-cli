@@ -9,10 +9,13 @@
 	}
 }
 
-# {!! domains.map(domain => `https://${domain}`).join(',\n# ') !!} {
-# 	proxy / {{ site.source }} {
-# 		transparent
-# 		websocket
-# 		fail_timeout 0s
-# 	}
-# }
+@if(ssl === true)
+{!! domains.map(domain => `https://${domain}`).join(',\n') !!} {
+	tls certs/marina.crt certs/marina.key
+	proxy / {{ site.source }} {
+		transparent
+		websocket
+		fail_timeout 0s
+	}
+}
+@endif

@@ -86,7 +86,10 @@ export class Site {
 	}
 
 	async save() {
-		const content = await this.app.view.render('Caddyfile', { site: this })
+		const content = await this.app.view.render('Caddyfile', {
+			site: this,
+			ssl: this.app.settings.ssl === true
+		})
 
 		await FS.writeFile(this.configPath, content)
 

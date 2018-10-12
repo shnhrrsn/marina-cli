@@ -7,6 +7,8 @@ import 'App/Commands/ListCommand'
 import 'App/Commands/OpenCommand'
 import 'App/Commands/RestartCommand'
 import 'App/Commands/ShareCommand'
+import 'App/Commands/SslOffCommand'
+import 'App/Commands/SslOnCommand'
 import 'App/Commands/StartCommand'
 import 'App/Commands/StopCommand'
 import 'App/Commands/UndockCommand'
@@ -25,6 +27,8 @@ export async function CommandsProvider(app) {
 		app.cli.register(OpenCommand)
 		app.cli.register(RestartCommand)
 		app.cli.register(ShareCommand)
+		app.cli.register(SslOffCommand)
+		app.cli.register(SslOnCommand)
 		app.cli.register(StartCommand)
 		app.cli.register(StopCommand)
 		app.cli.register(UndockCommand)

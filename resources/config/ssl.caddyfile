@@ -1,0 +1,3 @@
+:443 {
+	tls certs/marina.crt certs/marina.key
+}

@@ -1,4 +1,5 @@
 import hosts/*.conf
+import certs/*.conf
 
 :80 {
 	# Do nothing
