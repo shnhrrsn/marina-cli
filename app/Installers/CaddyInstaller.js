@@ -1,4 +1,5 @@
 import 'App/Installers/BaseInstaller'
+import { FS } from 'grind-support'
 
 const LAUNCHCTL_PLIST = '/Library/LaunchDaemons/marina.caddy.plist'
 const SUDOER = '/etc/sudoers.d/marina-caddy'
@@ -60,6 +61,21 @@ export class CaddyInstaller extends BaseInstaller {
 
 	stop() {
 		return this.sudo(`launchctl unload ${LAUNCHCTL_PLIST}`)
+	}
+
+	async forEachHost(callback) {
+		for(const file of await FS.readdir(this.app.paths.hosts())) {
+			const config = await FS.readFile(this.app.paths.hosts(file)).then(contents => contents.toString())
+			const domain = file.replace(/\.conf$/, '')
+
+			const proxy = ((config.match(/#proxy:(.+?)$/m) || [ ])[1] || '???').trim()
+			if(proxy === '???') {
+				Log.error(`Could not detect proxy value for ${domain}.`)
+				continue
+			}
+
+			await callback(file, { domain, proxy })
+		}
 	}
 
 }

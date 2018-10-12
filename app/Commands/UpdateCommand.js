@@ -1,5 +1,7 @@
 import 'App/Commands/BaseCommand'
+
 import 'App/Installers'
+import 'App/Installers/CaddyInstaller'
 
 import { FS } from 'grind-support'
 import { InputOption } from 'grind-cli'
@@ -31,20 +33,12 @@ export class UpdateCommand extends BaseCommand {
 
 		if(!this.option('preserve-caddyfiles')) {
 			Log.comment('Updating Caddyfiles')
-			for(const file of await FS.readdir(this.app.paths.hosts())) {
-				const config = await FS.readFile(this.app.paths.hosts(file)).then(contents => contents.toString())
-				const domain = file.replace(/\.conf$/, '')
-
-				const proxy = ((config.match(/#proxy:(.+?)$/m) || [ ])[1] || '???').trim()
-				if(proxy === '???') {
-					Log.error(`Could not detect proxy value for ${domain}.`)
-					continue
-				}
-
+			const caddy = new CaddyInstaller(this.app)
+			await caddy.forEachHost(async(file, { domain, proxy }) => {
 				Log.comment('Updating', domain)
 				const content = await this.app.view.render('Caddyfile', { domain, proxy })
 				await FS.writeFile(this.app.paths.hosts(file), content)
-			}
+			})
 		}
 
 		for(const installerClass of Installers) {
